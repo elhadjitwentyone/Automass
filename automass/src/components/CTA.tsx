@@ -1,7 +1,7 @@
 'use client'
 
 const WHATSAPP_NUMBER = 'XXXXXXXXXXX'
-const WHATSAPP_MESSAGE = encodeURIComponent('Bonjour, je souhaite acheter le Automass 4-in-1 Multi-Function Car Jump Starter au prix de 65 000 FCFA.')
+const WHATSAPP_MESSAGE = encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`
 
 export default function CTA() {
@@ -29,7 +29,7 @@ export default function CTA() {
           
           <div className="button-group cta-buttons">
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-large">
-              🛒 Commander l'Automass - 65 000 FCFA
+              🛒 Commander maintenant — 59 900 FCFA
             </a>
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-large">
               💬 Demander plus d'infos

@@ -171,6 +171,14 @@ button {
   padding: 20px;
 }
 
+.product-showcase-img {
+  width: 380px;
+  height: 380px;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .product-info-box {
   text-align: center;
   font-size: 0.95rem;
