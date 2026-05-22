@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 
-const WHATSAPP_NUMBER = 'XXXXXXXXXXX'
+const WHATSAPP_NUMBER = '221763202237'
 const WHATSAPP_MESSAGE = encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`
 
