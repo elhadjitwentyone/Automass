@@ -19,11 +19,11 @@ const features = [
   },
   {
     id: 3,
-    title: 'Power bank USB 10000mAh',
+    title: 'Power bank USB 16000mAh',
     description: 'Rechargez votre téléphone, tablette ou tout appareil USB en cas d\'urgence. Batterie haute capacité pour plusieurs charges.',
     icon: '🔌',
     color: 'feature-green',
-    specs: 'Capacité: 10000mAh | Sortie USB: 2A'
+    specs: 'Capacité: 16000mAh | Sortie USB: 2A'
   },
   {
     id: 4,

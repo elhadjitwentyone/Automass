@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
-  title: 'Automass 4-in-1 Multi-Function Car Jump Starter – 65 000 FCFA',
-  description: 'Découvrez l\'Automass 4-in-1 Multi-Function Car Jump Starter, tout-en-un pour démarrer votre voiture, gonfler vos pneus, recharger vos appareils et éclairer la nuit. Prix : 65 000 FCFA. Achetez ou contactez-nous sur WhatsApp.',
+  title: 'Automass 4-in-1 Multi-Function Car Jump Starter – 59 900 FCFA',
+  description: 'Découvrez l\'Automass 4-in-1 Multi-Function Car Jump Starter, tout-en-un pour démarrer votre voiture, gonfler vos pneus, recharger vos appareils et éclairer la nuit. Prix : 59 900 FCFA. Achetez ou contactez-nous sur WhatsApp.',
   viewport: 'width=device-width, initial-scale=1',
   keywords: 'Automass, Jump Starter, démarreur voiture, pompe à air, power bank, lampe LED',
 }

@@ -9,13 +9,13 @@ const testimonials = [
   },
   {
     name: 'Aminata S.',
-    location: 'Abidjan',
+    location: 'Thiès',
     text: 'La pompe à air est vraiment pratique. Mes pneus se dégonflaient et j\'ai pu les regonfler en 5 minutes. Super !',
     rating: 5,
   },
   {
     name: 'Samba K.',
-    location: 'Bamako',
+    location: 'Saint-Louis',
     text: 'Très utile pour recharger mon téléphone en voiture. La lampe LED m\'a aussi sauvé lors d\'une réparation nocturne.',
     rating: 5,
   },
