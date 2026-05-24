@@ -1,5 +1,6 @@
 'use client'
 
+import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import Specifications from '@/components/Specifications'
@@ -9,7 +10,8 @@ import CTA from '@/components/CTA'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main>
+      <Navbar />
       <Hero />
       <Features />
       <Specifications />
