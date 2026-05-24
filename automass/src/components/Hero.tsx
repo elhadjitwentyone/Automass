@@ -53,7 +53,7 @@ export default function Hero() {
         <div className="product-info-box">
           <p className="info-text">⚡ Démarre en 30 secondes</p>
           <p className="info-text">💨 Pression jusqu'à 150 PSI</p>
-          <p className="info-text">🔋 Batterie 10 000 mAh intégrée</p>
+          <p className="info-text">🔋 Batterie 16 000 mAh intégrée</p>
         </div>
       </div>
     </section>
