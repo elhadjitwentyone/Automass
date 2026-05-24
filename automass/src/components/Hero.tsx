@@ -40,6 +40,7 @@ export default function Hero() {
 
           <div className="hero-b-pricebox">
             <p className="hero-b-price-label">Prix spécial lancement</p>
+            <p className="hero-b-price-old"><s>70 000 FCFA</s></p>
             <p className="hero-b-price">59 900 <span>FCFA</span></p>
             <p className="hero-b-price-note">✓ Livraison gratuite · ✓ Garantie 12 mois</p>
           </div>
