@@ -1,43 +1,24 @@
 'use client'
 
-export default function FAQ() {
-  const faqs = [
-    {
-      question: 'L\'Automass est-il compatible avec ma voiture ?',
-      answer: 'Oui, l\'Automass 4-in-1 est compatible avec tous les véhicules 12V (voitures, motos, camionnettes). C\'est l\'équivalent universel du système électrique de votre voiture.'
-    },
-    {
-      question: 'Combien de temps dure la batterie interne ?',
-      answer: 'La batterie 16000mAh peut démarrer votre voiture 5-10 fois avant d\'avoir besoin d\'être rechargée (selon le modèle de voiture). Vous pouvez la recharger via USB en 4-5 heures.'
-    },
-    {
-      question: 'La pompe à air fonctionne-t-elle pour tous les pneus ?',
-      answer: 'Oui, la pompe fonctionne pour les pneus de voitures, motos, vélos et ballons de sport. Elle dispose d\'adaptateurs pour tous les types de valves.'
-    },
-    {
-      question: 'Est-ce que c\'est sûr d\'utiliser l\'Automass sur ma batterie ?',
-      answer: 'Totalement sûr ! L\'Automass dispose de multiples protections : protection contre les surcharges, les courts-circuits et l\'inversion de polarité. Les pinces sont isolées pour éviter tout danger.'
-    },
-    {
-      question: 'Quelle est la garantie ?',
-      answer: 'L\'Automass bénéficie d\'une garantie complète de 12 mois contre les défauts de fabrication. Nous offrons également un service client 24/7 en français.'
-    },
-    {
-      question: 'Combien de poids cela ajoute-t-il à ma voiture ?',
-      answer: 'Seulement 650 grammes ! L\'Automass est très compact et léger. Vous pouvez facilement le ranger dans le coffre, sous le siège ou dans la boîte à gants.'
-    },
-  ]
+const faqs = [
+  { q: 'Compatible avec ma voiture ?', a: 'Oui, l\'Automass fonctionne avec tous les véhicules 12V : voitures, motos, camionnettes.' },
+  { q: 'Combien de démarrages par charge ?', a: 'Entre 5 et 10 démarrages selon le modèle. Recharge complète en 4-5h via USB.' },
+  { q: 'La pompe fonctionne pour tous les pneus ?', a: 'Oui — voitures, motos, vélos, ballons. Adaptateurs inclus pour toutes les valves.' },
+  { q: 'C\'est sûr pour ma batterie ?', a: 'Totalement. Protection contre surcharge, court-circuit et inversion de polarité.' },
+  { q: 'Quelle est la garantie ?', a: 'Garantie complète 12 mois + support client en français 24/7.' },
+  { q: 'Poids et encombrement ?', a: 'Seulement 650g et 20×10×5cm. Se range sous le siège ou dans le coffre.' },
+]
 
+export default function FAQ() {
   return (
-    <section className="faq">
+    <section className="faq-b">
       <div className="container">
-        <h2 className="section-title">Questions fréquemment posées</h2>
-        
-        <div className="faq-grid">
-          {faqs.map((faq, index) => (
-            <div key={index} className="faq-item">
-              <h3 className="faq-question">{faq.question}</h3>
-              <p className="faq-answer">{faq.answer}</p>
+        <h2 className="section-title-b">Questions fréquentes</h2>
+        <div className="faq-b-grid">
+          {faqs.map((f, i) => (
+            <div key={i} className="faq-b-item">
+              <h3 className="faq-b-q">{f.q}</h3>
+              <p className="faq-b-a">{f.a}</p>
             </div>
           ))}
         </div>
