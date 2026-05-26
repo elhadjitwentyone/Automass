@@ -2,6 +2,18 @@
 
 import { useState } from 'react'
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+  }
+}
+
+const fbq = (...args: unknown[]) => {
+  if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+    window.fbq(...args)
+  }
+}
+
 const WHATSAPP_NUMBER = '221763202237'
 const WHATSAPP_MESSAGE = encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`
@@ -60,6 +72,12 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
       const data = await res.json()
       if (data.success === 'true' || data.success === true || res.ok) {
         setStep('success')
+        fbq('track', 'Purchase', {
+          value: parseInt(formData.quantity) * PRICE,
+          currency: 'XOF',
+          content_name: 'Automass 4-en-1',
+          num_items: parseInt(formData.quantity),
+        })
       } else {
         setError('Erreur envoi. Commandez via WhatsApp.')
       }
@@ -81,7 +99,10 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
             <h2 className="modal-title">Commander votre Automass</h2>
             <p className="modal-subtitle">Choisissez votre méthode de commande</p>
             <div className="order-options">
-              <button className="order-option order-option-form" onClick={() => setStep('form')}>
+              <button className="order-option order-option-form" onClick={() => {
+                setStep('form')
+                fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'XOF', content_name: 'Automass 4-en-1' })
+              }}>
                 <span className="option-icon">🌐</span>
                 <div className="option-text">
                   <strong>Commander en ligne</strong>
@@ -90,7 +111,10 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
                 <span className="option-arrow">→</span>
               </button>
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer"
-                className="order-option order-option-whatsapp" onClick={handleClose}>
+                className="order-option order-option-whatsapp" onClick={() => {
+                  fbq('track', 'Lead', { value: PRICE, currency: 'XOF', content_name: 'Automass WhatsApp' })
+                  handleClose()
+                }}>
                 <span className="option-icon">💬</span>
                 <div className="option-text">
                   <strong>Commander via WhatsApp</strong>
