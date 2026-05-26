@@ -14,7 +14,18 @@ const fbq = (...args: unknown[]) => {
   }
 }
 
-const WHATSAPP_NUMBER = '221763202237'
+const GS_WEBHOOK = process.env.NEXT_PUBLIC_GS_WEBHOOK
+
+const logOrder = (data: Record<string, string>) => {
+  if (!GS_WEBHOOK) return
+  fetch(GS_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  }).catch(() => {})
+}
+
+const WHATSAPP_NUMBER = '221774080629'
 const WHATSAPP_MESSAGE = encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`
 const PRICE = 59900
@@ -78,6 +89,15 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
           content_name: 'Automass 4-en-1',
           num_items: parseInt(formData.quantity),
         })
+        logOrder({
+          source: 'Formulaire',
+          name: formData.name,
+          phone: formData.phone,
+          address: formData.address,
+          quantity: formData.quantity,
+          total: `${total} FCFA`,
+          notes: formData.notes || '—',
+        })
       } else {
         setError('Erreur envoi. Commandez via WhatsApp.')
       }
@@ -113,6 +133,15 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer"
                 className="order-option order-option-whatsapp" onClick={() => {
                   fbq('track', 'Lead', { value: PRICE, currency: 'XOF', content_name: 'Automass WhatsApp' })
+                  logOrder({
+                    source: 'WhatsApp',
+                    name: '—',
+                    phone: '—',
+                    address: '—',
+                    quantity: '—',
+                    total: '59 900 FCFA',
+                    notes: 'Redirection WhatsApp',
+                  })
                   handleClose()
                 }}>
                 <span className="option-icon">💬</span>
