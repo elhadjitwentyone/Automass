@@ -53,6 +53,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'https://connect.facebook.net/en_US/fbevents.js');
                 fbq('init', '${PIXEL_ID}');
                 fbq('track', 'PageView');
+                fbq('track', 'ViewContent', {
+                  content_name: 'Automass 4-en-1',
+                  content_category: 'Équipement Auto',
+                  value: 59900,
+                  currency: 'XOF',
+                });
               `}
             </Script>
             <noscript>

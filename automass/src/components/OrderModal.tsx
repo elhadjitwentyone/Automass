@@ -25,9 +25,6 @@ const logOrder = (data: Record<string, string>) => {
   }).catch(() => {})
 }
 
-const WHATSAPP_NUMBER = '221774080629'
-const WHATSAPP_MESSAGE = encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`
 const PRICE = 59900
 const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/fedobusiness@proton.me'
 
@@ -37,7 +34,7 @@ interface OrderModalProps {
 }
 
 export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
-  const [step, setStep] = useState<'choice' | 'form' | 'success'>('choice')
+  const [step, setStep] = useState<'form' | 'success'>('form')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [formData, setFormData] = useState({
@@ -49,7 +46,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
   const handleClose = () => {
     onClose()
     setTimeout(() => {
-      setStep('choice')
+      setStep('form')
       setFormData({ name: '', phone: '', address: '', quantity: '1', notes: '' })
       setError('')
     }, 300)
@@ -99,10 +96,10 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
           notes: formData.notes || '—',
         })
       } else {
-        setError('Erreur envoi. Commandez via WhatsApp.')
+        setError('Une erreur est survenue. Veuillez réessayer.')
       }
     } catch {
-      setError('Connexion impossible. Commandez via WhatsApp.')
+      setError('Connexion impossible. Veuillez réessayer dans quelques instants.')
     } finally {
       setLoading(false)
     }
@@ -113,53 +110,11 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
       <div className="modal-box" onClick={e => e.stopPropagation()}>
         <button className="modal-close" onClick={handleClose}>✕</button>
 
-        {step === 'choice' && (
-          <div className="modal-content">
-            <div className="modal-icon">🛒</div>
-            <h2 className="modal-title">Commander votre Automass</h2>
-            <p className="modal-subtitle">Choisissez votre méthode de commande</p>
-            <div className="order-options">
-              <button className="order-option order-option-form" onClick={() => {
-                setStep('form')
-                fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'XOF', content_name: 'Automass 4-en-1' })
-              }}>
-                <span className="option-icon">🌐</span>
-                <div className="option-text">
-                  <strong>Commander en ligne</strong>
-                  <span>Formulaire simple — on vous contacte pour la livraison</span>
-                </div>
-                <span className="option-arrow">→</span>
-              </button>
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer"
-                className="order-option order-option-whatsapp" onClick={() => {
-                  fbq('track', 'Lead', { value: PRICE, currency: 'XOF', content_name: 'Automass WhatsApp' })
-                  logOrder({
-                    source: 'WhatsApp',
-                    name: '—',
-                    phone: '—',
-                    address: '—',
-                    quantity: '—',
-                    total: '59 900 FCFA',
-                    notes: 'Redirection WhatsApp',
-                  })
-                  handleClose()
-                }}>
-                <span className="option-icon">💬</span>
-                <div className="option-text">
-                  <strong>Commander via WhatsApp</strong>
-                  <span>Discutez directement — réponse immédiate</span>
-                </div>
-                <span className="option-arrow">→</span>
-              </a>
-            </div>
-            <p className="modal-note">✓ Livraison rapide · ✓ Garantie 12 mois · ✓ Stock disponible</p>
-          </div>
-        )}
-
         {step === 'form' && (
           <div className="modal-content">
-            <button className="back-btn" onClick={() => setStep('choice')}>← Retour</button>
+            <div className="modal-icon">🛒</div>
             <h2 className="modal-title">Vos informations de livraison</h2>
+            <p className="modal-subtitle">Remplissez le formulaire — notre équipe vous contacte pour confirmer</p>
             <div className="order-form">
               <div className="form-group">
                 <label>Nom complet <span className="required">*</span></label>
@@ -199,6 +154,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
               </button>
               <p className="form-disclaimer">Aucun paiement maintenant. Notre équipe vous contactera.</p>
             </div>
+            <p className="modal-note">✓ Livraison rapide · ✓ Garantie 12 mois · ✓ Stock disponible</p>
           </div>
         )}
 
@@ -210,10 +166,6 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
               Merci <strong>{formData.name}</strong> ! Notre équipe vous contactera au{' '}
               <strong>{formData.phone}</strong> très bientôt pour confirmer la livraison.
             </p>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer"
-              className="btn btn-whatsapp" style={{ display: 'block', textAlign: 'center', marginBottom: '10px' }}>
-              💬 Suivre via WhatsApp
-            </a>
             <button className="btn-submit" onClick={handleClose}>Fermer</button>
           </div>
         )}
