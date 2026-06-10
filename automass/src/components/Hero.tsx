@@ -1,10 +1,20 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import OrderModal from '@/components/OrderModal'
 
 const WHATSAPP_LINK = `https://wa.me/221763202237?text=${encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')}`
+
+function calcStock() {
+  const anchor = new Date('2026-06-10').getTime()
+  const now = Date.now()
+  const daysSince = Math.max(0, (now - anchor) / (1000 * 60 * 60 * 24))
+  const seed = new Date().getDate() % 3
+  const stock = Math.max(Math.round(43 - daysSince * 1.8 - seed), 5)
+  const soldToday = Math.min(2 + seed + Math.floor(new Date().getHours() / 6), 9)
+  return { stock, soldToday }
+}
 
 const features = [
   { icon: '⚡', label: 'Démarrage 12V', val: '1000A' },
@@ -15,6 +25,11 @@ const features = [
 
 export default function Hero() {
   const [modal, setModal] = useState(false)
+  const [stockData, setStockData] = useState({ stock: 43, soldToday: 3 })
+
+  useEffect(() => {
+    setStockData(calcStock())
+  }, [])
 
   return (
     <>
@@ -43,6 +58,19 @@ export default function Hero() {
             <p className="hero-b-price-old"><s>70 000 FCFA</s></p>
             <p className="hero-b-price">59 900 <span>FCFA</span></p>
             <p className="hero-b-price-note">✓ Livraison gratuite · ✓ Garantie 12 mois</p>
+          </div>
+
+          <div className="stock-bar">
+            <div className="stock-bar-track">
+              <div className="stock-bar-fill" style={{ width: `${Math.round((stockData.stock / 50) * 100)}%` }} />
+            </div>
+            <div className="stock-bar-labels">
+              <span className="stock-remaining">
+                <span className="stock-pulse" />
+                <strong>{stockData.stock}</strong> unités restantes
+              </span>
+              <span className="stock-sold">{stockData.soldToday} vendus aujourd&apos;hui</span>
+            </div>
           </div>
 
           <div className="button-group">

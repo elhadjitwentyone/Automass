@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 declare global {
   interface Window {
@@ -40,6 +40,12 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
   const [formData, setFormData] = useState({
     name: '', phone: '', address: '', quantity: '1', notes: '',
   })
+
+  useEffect(() => {
+    if (isOpen) {
+      fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'XOF', content_name: 'Automass 4-en-1' })
+    }
+  }, [isOpen])
 
   if (!isOpen) return null
 

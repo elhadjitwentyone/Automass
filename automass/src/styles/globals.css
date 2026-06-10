@@ -214,7 +214,63 @@ img { display:block; max-width:100%; }
   font-size:0.78rem;
   margin-top:8px;
 }
-.hero-b-left .button-group { animation:slideInL .6s ease .25s both; }
+.hero-b-left .button-group { animation:slideInL .6s ease .3s both; }
+
+/* ── Stock counter ── */
+.stock-bar {
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:10px;
+  padding:12px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  animation:slideInL .6s ease .25s both;
+}
+.stock-bar-track {
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,.15);
+  border-radius:3px;
+  overflow:hidden;
+}
+.stock-bar-fill {
+  height:100%;
+  background:linear-gradient(90deg, #4ade80, #22c55e);
+  border-radius:3px;
+  transition:width .8s ease;
+}
+.stock-bar-labels {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.stock-remaining {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:0.82rem;
+  color:rgba(255,255,255,.9);
+  font-weight:600;
+}
+.stock-remaining strong { color:#4ade80; }
+.stock-pulse {
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#4ade80;
+  flex-shrink:0;
+  animation:stockPulse 1.8s ease-in-out infinite;
+}
+@keyframes stockPulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.4; transform:scale(1.4); }
+}
+.stock-sold {
+  font-size:0.76rem;
+  color:rgba(255,255,255,.55);
+  font-weight:500;
+}
 
 /* Right */
 .hero-b-right {

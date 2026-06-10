@@ -2,10 +2,29 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import '../styles/globals.css'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://automass.vercel.app'
+const ogImage = 'https://sc04.alicdn.com/kf/H763c039dd0f94c9bbf65b7cd8f6e895fj.jpg'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Automass 4-en-1 — Démarreur Portable · 59 900 FCFA · Dakar',
   description: 'Démarreur Portable 4-en-1 : démarrage 12V 1000A, gonfleur 150PSI, power bank 16000mAh, lampe LED 3000lm. Livraison rapide à Dakar. Prix : 59 900 FCFA.',
   keywords: 'Automass, Jump Starter, démarreur voiture Dakar, pompe à air, power bank, Sénégal',
+  openGraph: {
+    title: 'Automass 4-en-1 — Ne restez jamais bloqué · 59 900 FCFA',
+    description: 'Démarrage 12V 1000A · Gonfleur 150PSI · Power Bank 16000mAh · LED 3000lm. Livraison rapide à Dakar. Paiement à la réception.',
+    url: siteUrl,
+    siteName: 'Automass',
+    images: [{ url: ogImage, width: 800, height: 800, alt: 'Automass 4-en-1 Démarreur Portable' }],
+    locale: 'fr_SN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Automass 4-en-1 — 59 900 FCFA · Dakar',
+    description: 'Démarrage 12V · Gonfleur · Power Bank · LED. Livraison rapide à Dakar. Paiement à la réception.',
+    images: [ogImage],
+  },
 }
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
