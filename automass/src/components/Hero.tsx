@@ -4,8 +4,6 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import OrderModal from '@/components/OrderModal'
 
-const WHATSAPP_LINK = `https://wa.me/221763202237?text=${encodeURIComponent('Bonjour, je souhaite commander le Démarreur Portable 4-en-1 au prix de 59 900 FCFA.')}`
-
 function calcStock() {
   const anchor = new Date('2026-06-10').getTime()
   const now = Date.now()
@@ -77,9 +75,6 @@ export default function Hero() {
             <button className="btn btn-dark btn-pulse" onClick={() => setModal(true)}>
               🛒 Commander maintenant
             </button>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
-              💬 WhatsApp
-            </a>
           </div>
         </div>
 
