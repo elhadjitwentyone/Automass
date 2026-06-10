@@ -16,12 +16,32 @@ const fbq = (...args: unknown[]) => {
 
 const GS_WEBHOOK = process.env.NEXT_PUBLIC_GS_WEBHOOK
 
-const logOrder = (data: Record<string, string>) => {
+const logOrder = (order: { name: string; phone: string; address: string; quantity: string; total: string; notes: string }) => {
   if (!GS_WEBHOOK) return
+  const now = new Date()
+  const p = (n: number) => String(n).padStart(2, '0')
   fetch(GS_WEBHOOK, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      'DATE': `${p(now.getDate())}/${p(now.getMonth() + 1)}/${now.getFullYear()}`,
+      'ID COMMANDE': `${now.getFullYear()}${p(now.getMonth() + 1)}${p(now.getDate())}-${now.getTime().toString().slice(-4)}`,
+      'CANAL': 'Site Web',
+      'NOM CLIENT': order.name,
+      'TÉLÉPHONE': order.phone,
+      'ADRESSE': order.address,
+      'VILLE': 'Dakar',
+      'QUARTIER': '—',
+      'PRODUIT': 'Automass 4-en-1',
+      'QTÉ': order.quantity,
+      'PRIX UNITAIRE (FCFA)': '59900',
+      'TOTAL (FCFA)': order.total.replace(' FCFA', '').replace(/\s/g, ''),
+      'FRAIS LIVRAISON (FCFA)': '0',
+      'STATUT': 'Nouvelle',
+      'DATE LIVRAISON': '',
+      'SOURCE PUB': 'Facebook Ads',
+      'NOTES': order.notes || '—',
+    }),
   }).catch(() => {})
 }
 
@@ -93,13 +113,12 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
           num_items: parseInt(formData.quantity),
         })
         logOrder({
-          source: 'Formulaire',
           name: formData.name,
           phone: formData.phone,
           address: formData.address,
           quantity: formData.quantity,
           total: `${total} FCFA`,
-          notes: formData.notes || '—',
+          notes: formData.notes,
         })
       } else {
         setError('Une erreur est survenue. Veuillez réessayer.')
